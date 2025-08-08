@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Détails - {{ site.name }}{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h1>{{ site.name }}</h1>
+            <p class="lead">{{ site.address }}</p>
+        </div>
+        <a href="{{ url_for('main.download_report', site_id=site.id) }}" class="btn btn-success">
+            Télécharger la Fiche de Synthèse (PDF)
+        </a>
+    </div>
+    <hr>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <h3>Visualisation Cartographique des Risques</h3>
+            <div id="map"></div>
+        </div>
+        <div class="col-md-4">
+            <h3>Scénarios de Risques</h3>
+            <ul class="list-group">
+                {% for scenario in site.risk_scenarios %}
+                <li class="list-group-item">
+                    <strong>{{ scenario.description }}</strong><br>
+                    <span class="badge 
+                        {% if scenario.risk_type == 'thermique' %}bg-danger
+                        {% elif scenario.risk_type == 'toxique' %}bg-success
+                        {% elif scenario.risk_type == 'surpression' %}bg-warning text-dark
+                        {% else %}bg-secondary{% endif %}">
+                        {{ scenario.risk_type | capitalize }}
+                    </span>
+                    - Zone de {{ scenario.radius_meters }}m
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Le point crucial : Passer les données du backend au JS -->
+    <script>
+        // On rend les données JSON disponibles pour notre script map.js
+        const siteData = JSON.parse('{{ site_json|tojson|safe }}');
+    </script>
+{% endblock %}

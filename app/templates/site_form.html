@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Ajouter un Site{% endblock %}
+
+{% block content %}
+    <h1>Ajouter un nouveau site et son risque principal</h1>
+    <hr>
+    <form method="POST" action="{{ url_for('main.new_site') }}">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nom du Site</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="address" class="form-label">Adresse Complète</label>
+            <input type="text" class="form-control" id="address" name="address" required>
+            <div class="form-text">L'adresse sera utilisée pour géolocaliser le site sur la carte.</div>
+        </div>
+
+        <h4 class="mt-4">Scénario de Risque Principal</h4>
+        <div class="p-3 border rounded">
+             <div class="mb-3">
+                <label for="risk_description" class="form-label">Description du Phénomène</label>
+                <input type="text" class="form-control" id="risk_description" name="risk_description" placeholder="Ex: Explosion d'un réservoir de propane">
+            </div>
+             <div class="mb-3">
+                <label for="risk_type" class="form-label">Type de Risque</label>
+                <select class="form-select" id="risk_type" name="risk_type">
+                    <option value="thermique">Thermique (Incendie, BLEVE)</option>
+                    <option value="toxique">Toxique (Fuite chimique)</option>
+                    <option value="surpression">Surpression (Explosion)</option>
+                </select>
+            </div>
+             <div class="mb-3">
+                <label for="risk_radius" class="form-label">Rayon de la zone d'effet (en mètres)</label>
+                <input type="number" class="form-control" id="risk_radius" name="risk_radius" placeholder="Ex: 500">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Enregistrer le Site</button>
+    </form>
+{% endblock %}

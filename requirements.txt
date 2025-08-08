@@ -1,0 +1,15 @@
+# Framework et extensions Flask
+Flask==2.2.2
+Flask-SQLAlchemy==3.0.3
+Flask-Migrate==4.0.4
+Werkzeug==2.3.7
+
+# Gestion des variables d'environnement
+python-dotenv==0.21.0
+
+# Services métier
+geopy==2.3.0
+fpdf2==2.7.4
+
+# Serveur de production (recommandé pour le déploiement)
+gunicorn==20.1.0

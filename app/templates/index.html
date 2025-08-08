@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Accueil - Liste des Sites{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Sites Industriels Enregistrés</h1>
+        <a href="{{ url_for('main.new_site') }}" class="btn btn-primary">Ajouter un nouveau site</a>
+    </div>
+
+    {% if sites %}
+        <ul class="list-group">
+            {% for site in sites %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <h5>{{ site.name }}</h5>
+                    <small class="text-muted">{{ site.address }}</small>
+                </div>
+                <div>
+                    <a href="{{ url_for('main.view_site', site_id=site.id) }}" class="btn btn-info btn-sm">Visualiser</a>
+                    <form action="{{ url_for('main.delete_site', site_id=site.id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce site ?');">
+                        <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                    </form>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="alert alert-info">Aucun site enregistré pour le moment.</div>
+    {% endif %}
+{% endblock %}
