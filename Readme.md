@@ -85,26 +85,7 @@ Hébergement : Heroku / PythonAnywhere / Render
 
 Contrôle de Version : Git & GitHub
 
-Architecture Simplifiée
-code
-Code
-download
-content_copy
-expand_less
 
-+----------------+
-        |   Navigateur   |
-        | (HTML/CSS/JS)  |
-        |  (Leaflet.js)  |
-        +-------+--------+
-                |
-     (Requêtes HTTP/API REST)
-                |
-        +-------v--------+      +----------------+
-        |     Backend    |      | Base de Données|
-        | (Python/Flask) +------> (PostgreSQL /  |
-        |                |      |    PostGIS)    |
-        +----------------+      +----------------+
 4. Installation et Lancement Local
 
 Pour lancer ce projet sur votre machine locale, suivez ces étapes :
